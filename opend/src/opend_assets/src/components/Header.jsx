@@ -1,6 +1,9 @@
 import React from "react";
 import logo from "../../assets/logo.png";
 import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
+import homeImage from "../../assets/home-img.png";
+import Minter from "./Minter";
+import Gallery from "./Gallery";
 
 function Header() {
   return (
@@ -28,11 +31,23 @@ function Header() {
           </div>
         </header>
       </div>
-      <Switch></Switch>
+      <Switch>
+        <Route exact path="/">
+          <img className="bottom-space" src={homeImage} />
+        </Route>
+        <Route path="/discover">
+          {" "}
+          <h1> Discover</h1>
+        </Route>
+        <Route path="/minter">
+          <Minter />
+        </Route>
+        <Route path="/collection">
+          <Gallery title="My NFTs" />
+        </Route>
+      </Switch>
     </BrowserRouter>
   );
 }
 
 export default Header;
-
-//<img className="bottom-space" src={homeImage} />
