@@ -1,7 +1,7 @@
 import Principal "mo:base/Principal";
 import Debug "mo:base/Debug";
 import Cycles "mo:base/ExperimentalCycles";
-import NFTActorClass "../nft/nft";
+import NFTActorClass "../NFT/nft";
 
 actor OpenD {
     public shared (msg) func mint(imgData : [Nat8], name : Text) : async Principal {
