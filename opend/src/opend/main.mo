@@ -36,7 +36,7 @@ actor OpenD {
         mapOfOwners.put(owner, ownedNFTs);
     };
 
-    public query func getOwnedNFTS(user : Principal) : async [Principal] {
+    public query func getOwnedNFTs(user : Principal) : async [Principal] {
         var userNFTs : List.List<Principal> = switch (mapOfOwners.get(user)) {
             case null List.nil<Principal>();
             case (?result) result;

@@ -8,9 +8,12 @@ import { opend } from "../../../declarations/opend";
 import CURRENT_USER_ID from "../index";
 
 function Header() {
+  const [userOwnedGallery, setOwnedGallery] = useState();
+
   async function getNFTs() {
     const userNFTIds = await opend.getOwnedNFTs(CURRENT_USER_ID);
     console.log(userNFTIds);
+    setOwnedGallery(<Gallery title="My NFTs" ids={userNFTIds} />);
   }
 
   useEffect(() => {
@@ -52,9 +55,7 @@ function Header() {
         <Route path="/minter">
           <Minter />
         </Route>
-        <Route path="/collection">
-          <Gallery title="My NFTs" />
-        </Route>
+        <Route path="/collection">{userOwnedGallery}</Route>
       </Switch>
     </BrowserRouter>
   );
