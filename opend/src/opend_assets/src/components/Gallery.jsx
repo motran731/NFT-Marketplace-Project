@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Item from "./Item";
+import { Principal } from "@dfinity/principal";
 
 function Gallery(props) {
   const [items, setItems] = useState();
@@ -11,6 +12,10 @@ function Gallery(props) {
       );
     }
   }
+  useEffect(() => {
+    fetchNFTsNFTs();
+  }, []);
+
   return (
     <div className="gallery-view">
       <h3 className="makeStyles-title-99 Typography-h3">{props.title}</h3>
