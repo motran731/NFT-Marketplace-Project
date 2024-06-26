@@ -1,5 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { opend } from "../../../declarations/opend";
+import { Principal } from "@dfinity/principal";
 
 function Minter() {
   const { register, handleSubmit } = useForm();
@@ -8,6 +10,9 @@ function Minter() {
     const name = data.name;
     const image = data.image[0];
     const imageByteData = [...new Uint8Array(await image.arrayBuffer())];
+
+    const newNFTID = await opend.mint(imageByteData, name);
+    console.log(newNFTID.toText());
   }
   return (
     <div className="minter-container">
