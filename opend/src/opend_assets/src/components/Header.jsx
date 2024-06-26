@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../../assets/logo.png";
 import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
 import homeImage from "../../assets/home-img.png";
@@ -49,7 +49,6 @@ function Header() {
           <img className="bottom-space" src={homeImage} />
         </Route>
         <Route path="/discover">
-          {" "}
           <h1> Discover</h1>
         </Route>
         <Route path="/minter">
