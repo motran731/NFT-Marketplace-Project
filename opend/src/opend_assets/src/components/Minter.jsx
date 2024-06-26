@@ -4,7 +4,11 @@ import { useForm } from "react-hook-form";
 function Minter() {
   const { register, handleSubmit } = useForm();
 
-  async function onSubmit(data) {}
+  async function onSubmit(data) {
+    const name = data.name;
+    const image = data.image[0];
+    const imageByteData = [...new Uint8Array(await image.arrayBuffer())];
+  }
   return (
     <div className="minter-container">
       <h3 className="makeStyles-title-99 Typography-h3 form-Typography-gutterBottom">
@@ -16,6 +20,7 @@ function Minter() {
       <form className="makeStyles-form-109" noValidate="" autoComplete="off">
         <div className="upload-container">
           <input
+            {...register("image", { required: true })}
             className="upload"
             type="file"
             accept="image/x-png,image/jpeg,image/gif,image/svg+xml,image/webp"
