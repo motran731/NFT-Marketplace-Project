@@ -7,8 +7,14 @@ import NFTActorClass "../NFT/nft";
 
 actor OpenD {
 
+    private type Listing = {
+        itemOwner : Principal;
+        itemPrice : Nat;
+    };
+
     var mapOfNFTs = HashMap.HashMap<Principal, NFTActorClass.NFT>(1, Principal.equal, Principal.hash);
     var mapOfOwners = HashMap.HashMap<Principal, List.List<Principal>>(1, Principal.equal, Principal.hash);
+    var mapOfListings = HashMap.HashMap<Principal, List>(1, Principal.equal, Principal.hash);
     //owner can have many nfts
 
     public shared (msg) func mint(imgData : [Nat8], name : Text) : async Principal {
@@ -42,5 +48,23 @@ actor OpenD {
             case (?result) result;
         };
         return List.toArray(userNFTs);
+    };
+
+    public shared (msg) func listItem(id : Principal, price : Nat) : async Text {
+        var item : NFTActorClass.NFT = switch (mapOfNFTs.get(id)) {
+            case null return "NFT does NOT exist";
+            case (?result) result;
+        };
+        let owner = await item.getOwner();
+        if (Principal.equal(owner, msg.caller)) {
+            let newListing : Listing = {
+                itemOwner = owner;
+                itemPrice = price;
+            };
+            mapOfListings.put(id, newListing);
+            return "Success";
+        } else {
+            return "You don't own the NFT.";
+        };
     };
 };

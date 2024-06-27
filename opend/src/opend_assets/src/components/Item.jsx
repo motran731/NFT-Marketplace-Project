@@ -35,7 +35,7 @@ function Item(props) {
     setName(name);
     setOwner(owner.toText());
     setImage(image);
-    setButton(<Button handleClick={handleSell} />);
+    setButton(<Button handleClick={handleSell} text={"Sell"} />);
   }
 
   useEffect(() => {
