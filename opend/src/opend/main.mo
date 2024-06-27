@@ -14,7 +14,7 @@ actor OpenD {
 
     var mapOfNFTs = HashMap.HashMap<Principal, NFTActorClass.NFT>(1, Principal.equal, Principal.hash);
     var mapOfOwners = HashMap.HashMap<Principal, List.List<Principal>>(1, Principal.equal, Principal.hash);
-    var mapOfListings = HashMap.HashMap<Principal, List>(1, Principal.equal, Principal.hash);
+    var mapOfListings = HashMap.HashMap<Principal, Listing>(1, Principal.equal, Principal.hash);
     //owner can have many nfts
 
     public shared (msg) func mint(imgData : [Nat8], name : Text) : async Principal {
