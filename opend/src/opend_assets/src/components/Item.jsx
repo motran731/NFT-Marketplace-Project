@@ -12,6 +12,8 @@ function Item(props) {
   const [image, setImage] = useState();
   const [button, setButton] = useState();
   const [priceInput, setPriceInput] = useState();
+  const [loaderHidden, setLoaderHidden] = useState(true);
+  const [blur, setBlur] = useState();
 
   const id = props.id;
 
@@ -61,6 +63,8 @@ function Item(props) {
   }
 
   async function sellItem() {
+    setBlur({ filter: "blur(4px)" });
+    setLoaderHidden(false);
     console.log("set price = " + price);
     const listingResult = await opend.listItem(props.id, Number(price));
     console.log("listing: " + listingResult);
@@ -68,6 +72,12 @@ function Item(props) {
       const openDId = await opend.getOpenDCanisterID();
       const transferResult = await NFTActor.transferOwnership(openDId, true);
       console.log("transfer: " + transferResult);
+      if (transferResult == "Success") {
+        setLoaderHidden(true);
+        setButton();
+        setPriceInput();
+        setOwner("OpenD");
+      }
     }
   }
 
@@ -77,7 +87,14 @@ function Item(props) {
         <img
           className="disCardMedia-root makeStyles-image-19 disCardMedia-media disCardMedia-img"
           src={image}
+          style={blur}
         />
+        <div className="lds-ellipsis" hidden={loaderHidden}>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
         <div className="disCardContent-root">
           <h2 className="disTypography-root makeStyles-bodyText-24 disTypography-h5 disTypography-gutterBottom">
             {name}
