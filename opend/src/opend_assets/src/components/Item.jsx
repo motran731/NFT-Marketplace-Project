@@ -4,6 +4,7 @@ import { Actor, HttpAgent } from "@dfinity/agent";
 import { idlFactory } from "../../../declarations/nft";
 import { Principal } from "@dfinity/principal";
 import Button from "./Button";
+import { opend } from "../../../declarations/opend/index";
 
 function Item(props) {
   const [name, setName] = useState();
@@ -43,7 +44,7 @@ function Item(props) {
 
   let price;
   function handleSell() {
-    console.log("sell clicked");
+    console.log("Sell clicked");
     setPriceInput(
       <input
         placeholder="Price in TRAN"
@@ -54,6 +55,17 @@ function Item(props) {
       />
     );
     setButton(<Button handleClick={sellItem} text={"Confirm"} />);
+  }
+
+  async function sellItem() {
+    console.log("set price = " + price);
+    const listingResult = await opend.listItem(props.id, Number(price));
+    console.log("listing: " + listingResult);
+    if (listingResult == "Success") {
+      const openDId = await opend.getOpenDCanisterID();
+      const transferResult = await NFTActor.transferOwnership(openDId, true);
+      console.log("transfer: " + transferResult());
+    }
   }
 
   return (
