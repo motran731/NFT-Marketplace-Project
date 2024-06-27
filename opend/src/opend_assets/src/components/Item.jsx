@@ -4,7 +4,7 @@ import { Actor, HttpAgent } from "@dfinity/agent";
 import { idlFactory } from "../../../declarations/nft";
 import { Principal } from "@dfinity/principal";
 import Button from "./Button";
-import { opend } from "../../../declarations/opend/index";
+import { opend } from "../../../declarations/opend";
 
 function Item(props) {
   const [name, setName] = useState();
