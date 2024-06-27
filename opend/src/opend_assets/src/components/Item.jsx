@@ -10,6 +10,7 @@ function Item(props) {
   const [owner, setOwner] = useState();
   const [image, setImage] = useState();
   const [button, setButton] = useState();
+  const [priceInput, setPriceInput] = useState();
 
   const id = props.id;
 
@@ -40,8 +41,19 @@ function Item(props) {
     loadNFT();
   }, []);
 
+  let price;
   function handleSell() {
     console.log("sell clicked");
+    setPriceInput(
+      <input
+        placeholder="Price in TRAN"
+        type="number"
+        className="price-input"
+        value={price}
+        onChange={(e) => (price = e.target.value)}
+      />
+    );
+    setButton(<Button handleClick={sellItem} text={"Confirm"} />);
   }
 
   return (
@@ -59,6 +71,7 @@ function Item(props) {
           <p className="disTypography-root makeStyles-bodyText-24 disTypography-body2 disTypography-colorTextSecondary">
             Owner: {owner}
           </p>
+          {priceInput}
           {button}
         </div>
       </div>
