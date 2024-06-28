@@ -42,13 +42,18 @@ function Item(props) {
     setOwner(owner.toText());
     setImage(image);
 
-    const nftIsListed = await opend.isListed(props.id);
-    if (nftIsListed) {
-      setOwner("MOMOMO");
-      setBlur({ filter: "blur(4px" });
-      setSellStatus("LISTED");
-    } else {
-      setButton(<Button handleClick={handleSell} text={"Sell"} />);
+    if (props.role == "collection") {
+      const nftIsListed = await opend.isListed(props.id);
+
+      if (nftIsListed) {
+        setOwner("MOMOMO");
+        setBlur({ filter: "blur(4px" });
+        setSellStatus("LISTED");
+      } else {
+        setButton(<Button handleClick={handleSell} text={"Sell"} />);
+      }
+    } else if (props.role == "discover") {
+      setButton(<Button handleClick={handleBuy} text={"BUY"} />);
     }
   }
 
@@ -77,6 +82,7 @@ function Item(props) {
     console.log("set price = " + price);
     const listingResult = await opend.listItem(props.id, Number(price));
     console.log("listing: " + listingResult);
+
     if (listingResult == "Success") {
       const openDId = await opend.getOpenDCanisterID();
       const transferResult = await NFTActor.transferOwnership(openDId, true);
@@ -89,6 +95,10 @@ function Item(props) {
         setSellStatus("LISTED");
       }
     }
+  }
+
+  async function handleBuy() {
+    console.log("buy was triggered");
   }
 
   return (

@@ -19,7 +19,9 @@ function Header() {
     );
     const listedNFTIds = await opend.getListedNFTs();
     console.log(listedNFTIds);
-    setListingGallery(<Gallery title="Discover" ids={listedNFTIds} />);
+    setListingGallery(
+      <Gallery title="Discover" ids={listedNFTIds} role="discover" />
+    );
   }
 
   useEffect(() => {
