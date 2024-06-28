@@ -4,6 +4,7 @@ import Cycles "mo:base/ExperimentalCycles";
 import HashMap "mo:base/HashMap";
 import List "mo:base/List";
 import NFTActorClass "../NFT/nft";
+import Iter "mo:base/Iter";
 
 actor OpenD {
 
@@ -49,6 +50,11 @@ actor OpenD {
         return List.toArray(userNFTs);
     };
 
+    public query func getListedNFTs() : async [Principal] {
+        let ids = Iter.toArray(mapOfListings.keys());
+        return ids;
+
+    };
     public shared (msg) func listItem(id : Principal, price : Nat) : async Text {
         var item : NFTActorClass.NFT = switch (mapOfNFTs.get(id)) {
             case null return "NFT does not exist.";

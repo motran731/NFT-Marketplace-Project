@@ -41,7 +41,15 @@ function Item(props) {
     setName(name);
     setOwner(owner.toText());
     setImage(image);
-    setButton(<Button handleClick={handleSell} text={"Sell"} />);
+
+    const nftIsListed = await opend.isListed(props.id);
+    if (nftIsListed) {
+      setOwner("MOMOMO");
+      setBlur({ filter: "blur(4px" });
+      setSellStatus("LISTED");
+    } else {
+      setButton(<Button handleClick={handleSell} text={"Sell"} />);
+    }
   }
 
   useEffect(() => {
@@ -78,6 +86,7 @@ function Item(props) {
         setButton();
         setPriceInput();
         setOwner("MOMOMO");
+        setSellStatus("LISTED");
       }
     }
   }
@@ -99,7 +108,7 @@ function Item(props) {
         <div className="disCardContent-root">
           <h2 className="disTypography-root makeStyles-bodyText-24 disTypography-h5 disTypography-gutterBottom">
             {name}
-            <span className="purple-text"></span>
+            <span className="purple-text"> {sellStatus}</span>
           </h2>
           <p className="disTypography-root makeStyles-bodyText-24 disTypography-body2 disTypography-colorTextSecondary">
             Owner: {owner}
