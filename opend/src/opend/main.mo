@@ -22,7 +22,6 @@ actor OpenD {
 
         Debug.print(debug_show (Cycles.balance()));
         Cycles.add(100_500_000_000);
-
         let newNFT = await NFTActorClass.NFT(name, owner, imgData);
         Debug.print(debug_show (Cycles.balance()));
 
@@ -72,4 +71,12 @@ actor OpenD {
     public query func getOpenDCanisterID() : async Principal {
         return Principal.fromActor(OpenD);
     };
+
+    // public query func isListed(id : Principal) : async Bool {
+    //     if (mapOfListings.get(id) == null) {
+    //         return false;
+    //     } else {
+    //         return true;
+    //     };
+    // };
 };

@@ -13,7 +13,8 @@ function Minter() {
     setLoaderHidden(false);
     const name = data.name;
     const image = data.image[0];
-    const imageByteData = [...new Uint8Array(await image.arrayBuffer())];
+    const imageArray = await image.arrayBuffer();
+    const imageByteData = [...new Uint8Array(imageArray)];
 
     const newNFTID = await opend.mint(imageByteData, name);
     console.log(newNFTID.toText());
