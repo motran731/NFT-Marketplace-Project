@@ -8,6 +8,7 @@ import Button from "./Button";
 import { opend } from "../../../declarations/opend";
 import CURRENT_USER_ID from "../index";
 import PriceLabel from "./PriceLabel";
+import { canisterId } from "../../../declarations/nft/index";
 
 function Item(props) {
   const [name, setName] = useState();
@@ -108,6 +109,13 @@ function Item(props) {
 
   async function handleBuy() {
     console.log("buy was triggered");
+    const tokenActor = await Actor.createActor(tokenIdlFactory, {
+      agent,
+      canisterId: Principal.fromText("rrkah-fqaaa-aaaaa-aaaaq-cai"),
+    });
+
+    const sellerId = await opend.getOriginalOwner(props.id);
+    const itemPrice = await opend.getListedNFTPrice(props.id);
   }
 
   return (
