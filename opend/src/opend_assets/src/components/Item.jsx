@@ -116,6 +116,18 @@ function Item(props) {
 
     const sellerId = await opend.getOriginalOwner(props.id);
     const itemPrice = await opend.getListedNFTPrice(props.id);
+
+    const result = await tokenActor.transfer(sellerId, itemPrice);
+    //console.log(result);
+    if (result == "Success") {
+      //transfer the ownership
+      const transferResult = await opend.completePurchase(
+        props.id,
+        sellerId,
+        CURRENT_USER_ID
+      );
+      console.log("purchase: " + transferResult);
+    }
   }
 
   return (
