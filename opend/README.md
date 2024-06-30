@@ -112,7 +112,7 @@ dfx canister call opend listItem '(principal "<REPLACE WITH NFT CANISTER ID>", 2
 ```
 
 ```
-dfx canister call opend listItem '(principal "q4eej-kyaaa-aaaaa-aaaha-cai", 2)'
+dfx canister call opend listItem '(principal "qjdve-lqaaa-aaaaa-aaaeq-cai", 2)'
 
 ```
 
@@ -129,7 +129,7 @@ dfx canister call <REPLACE WITH NFT CANISTER ID> transferOwnership '(principal "
 ```
 
 ```
-dfx canister call q4eej-kyaaa-aaaaa-aaaha-cai transferOwnership '(principal "ryjl3-tyaaa-aaaaa-aaaba-cai", true)'
+dfx canister call qjdve-lqaaa-aaaaa-aaaeq-cai transferOwnership '(principal "ryjl3-tyaaa-aaaaa-aaaba-cai", true)'
 ```
 
 # Conneting to the Token Canister
