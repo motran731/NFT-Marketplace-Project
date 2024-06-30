@@ -6,6 +6,7 @@ import { Principal } from "@dfinity/principal";
 import Button from "./Button";
 import { opend } from "../../../declarations/opend";
 import CURRENT_USER_ID from "../index";
+import PriceLabel from "./PriceLabel";
 
 function Item(props) {
   const [name, setName] = useState();
@@ -16,6 +17,7 @@ function Item(props) {
   const [loaderHidden, setLoaderHidden] = useState(true);
   const [blur, setBlur] = useState();
   const [sellStatus, setSellStatus] = useState("");
+  const [priceLabel, setPriceLabel] = useState();
 
   const id = props.id;
 
@@ -120,6 +122,7 @@ function Item(props) {
           <div></div>
         </div>
         <div className="disCardContent-root">
+          {PriceLabel}
           <h2 className="disTypography-root makeStyles-bodyText-24 disTypography-h5 disTypography-gutterBottom">
             {name}
             <span className="purple-text"> {sellStatus}</span>
