@@ -60,6 +60,8 @@ function Item(props) {
       if (originalOwner.toText() != CURRENT_USER_ID.toText()) {
         setButton(<Button handleClick={handleBuy} text={"Buy"} />);
       }
+      const price = await opend.getListedNFTPrice(props.id);
+      setPriceLabel(<PriceLabel sellPrice={price.toString()} />);
     }
   }
 
@@ -122,7 +124,7 @@ function Item(props) {
           <div></div>
         </div>
         <div className="disCardContent-root">
-          {PriceLabel}
+          {priceLabel}
           <h2 className="disTypography-root makeStyles-bodyText-24 disTypography-h5 disTypography-gutterBottom">
             {name}
             <span className="purple-text"> {sellStatus}</span>
